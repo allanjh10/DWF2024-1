@@ -1,0 +1,33 @@
+<!-- Component: CategoryComponent -->
+<div class="card">
+  
+    <div class="card-header">
+           <!--Title of page -->
+          <h1>CATEGORIES</h1>
+          <!-- Table title  -->
+          <h5>Category</h5>
+    </div>
+
+    <!-- Table content -->
+
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-dark">
+                    <th>Category_id</th>
+                    <th>Code</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{category.code}} </td>
+                    <td>{{category.category}}</td>
+                    <td>{{ category.status == 0 ? "Inactivo" : "Activo" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
