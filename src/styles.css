@@ -1,4 +1,57 @@
 @charset "UTF-8";
+
+
+.table-title{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Modal  */
+
+.modal-content{
+  padding: 0px 8px;
+}
+
+.modal-header{
+  padding: 8px 16px !important;
+}
+
+.form-group{
+  margin-bottom: 16px;
+}
+
+.form-button{  
+  margin-top: 32px;
+  margin-bottom: 16px;
+
+  text-align: center;
+}
+
+.btn-new{
+  float: right;
+  width: 200px;
+}
+
+.btn-form{
+  width: 200px;
+}
+
+.modal-close-button{
+  border: none;
+  background-color: white;
+}
+
+.modal-close-button-x{
+  color: #8181A5;
+  font-size: 32px;
+}
+
+/* Color  */
+
+.color-red{
+  color: red;
+}
 /*!
  * Bootswatch v5.3.1 (https://bootswatch.com)
  * Theme: lux
