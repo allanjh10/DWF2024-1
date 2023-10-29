@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './modules/product/product.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { CategoryComponent } from './modules/product/components/category/category.component';
-import { NavbarComponent } from './modules/layout/navbar/navbar.component';
 
 
 @NgModule({
