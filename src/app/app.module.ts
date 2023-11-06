@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './modules/product/product.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { CategoryComponent } from './modules/product/components/category/category.component';
+import { ConsumeApiModule } from './modules/consume-api/consume-api.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CategoryComponent } from './modules/product/components/category/categor
     AppRoutingModule,
     ProductModule,
     LayoutModule,
+    ConsumeApiModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
