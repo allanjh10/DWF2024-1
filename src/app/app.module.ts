@@ -7,6 +7,7 @@ import { ProductModule } from './modules/product/product.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { CategoryComponent } from './modules/product/components/category/category.component';
 import { ConsumeApiModule } from './modules/consume-api/consume-api.module';
+import {NgxPhotoEditorModule} from "ngx-photo-editor";
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ConsumeApiModule } from './modules/consume-api/consume-api.module';
     ProductModule,
     LayoutModule,
     ConsumeApiModule,
+    NgxPhotoEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
