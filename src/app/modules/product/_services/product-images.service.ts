@@ -25,6 +25,6 @@ export class ProductImagesService {
   }
 
   updateProductImage(product_image: any) {
-    return this.http.put(this.url + this.route, product_image);
+    return this.http.post(this.url + this.route, product_image);
   }
 }

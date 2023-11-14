@@ -22,6 +22,7 @@ export class ProductImageComponent{
 
   product: any | Product = new Product(); // datos del producto consultado
   product_image: any | ProductImage = new ProductImage(); // datos de la imagen del producto consultado
+  product_images: any | ProductImage[] = []; // lista de imagenes del producto consultado
   gtin: any | string = ""; // gtin del producto consultado
 
   categories: Category[] = []; // lista de regiones
@@ -97,8 +98,8 @@ export class ProductImageComponent{
   getImage(id: number){
     this.productImageService.getProductImages(id).subscribe(
       res => {
-        this.product_image = res; // asigna la respuesta de la API a la variable de cliente
-        console.log(this.product_image + "hola");
+        this.product_images = res; // asigna la respuesta de la API a la variable 
+        console.log(res)
       },
       err => {
         // muestra mensaje de error

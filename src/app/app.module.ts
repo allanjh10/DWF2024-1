@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CustomerModule } from './modules/customer/customer.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductModule } from './modules/product/product.module';
@@ -17,7 +17,6 @@ import {NgxPhotoEditorModule} from "ngx-photo-editor";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProductModule,
     LayoutModule,
     ConsumeApiModule,
     NgxPhotoEditorModule,
