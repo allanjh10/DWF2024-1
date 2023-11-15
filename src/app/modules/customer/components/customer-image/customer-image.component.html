@@ -1,32 +1,31 @@
-<div class="card-header">
-    <div class="row">
-        <div class="col-md">
-            <span class="btn-return" (click)="redirect(['customer'])">
-                <i class="ph ph-arrow-circle-left icon-text-button"></i>
-                Regresar
-            </span>
-        </div>
-        
-        <div class="col-md">
-            <span class="edit-customer" (click)="updateCustomer()">
-                <i class="ph ph-note-pencil icon-text-button"></i>
-                Editar cliente
-            </span>
-        </div>
-    </div>
-</div>
-<br>
 
-<div class="card-body">
-    <div class="row">
 
-        <!-- customer image  -->
-    
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body-customer text-center">
-                    <img src="{{ customer.image.image != '' ? customer.image.image: 'assets/img/user_logo.jpg' }}" alt="..." class="img-thumbnail customer-image">
+<div class="container">
+    <div class="container py-5">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md">
+                    <span class="btn-return" (click)="redirect(['product'])">
+                        <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                        Regresar
+                    </span>
                 </div>
+                
+                <div class="col-md d-flex justify-content-end">
+                    <span class="edit-product" (click)="updateCustomer()">
+                        <i class="ph ph-note-pencil icon-text-button"></i>
+                        Editar cliente
+                    </span>
+                </div>
+            </div>
+        </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{{ customer.image.image != '' ? customer.image.image: 'assets/img/no_logo.webp' }}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
                 <div class="edit-customer-image text-center">
                     <label for="uploadImage" class="cursor-pointer">
                         <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
@@ -34,53 +33,165 @@
                         Editar imagen
                     </label>
                 </div>
+                
+              <h5 class="my-3">
+                <!-- name  -->
+                <div class="customer-title">
+                    {{ customer.name + " " + customer.surname }}
+                </div></h5>
+              <p class="text-muted mb-1">Full Stack Developer</p>
+              <p class="text-muted mb-4">{{ customer.address }}</p>
+              <div class="d-flex justify-content-center mb-2">
+                <button type="button" class="btn btn-primary">Ver Pedidos</button>
+              </div>
             </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">https://chatosproject.com</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                  <p class="mb-0">chatos-project</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                  <p class="mb-0">@chatos-project</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                  <p class="mb-0">chatosproject</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                  <p class="mb-0">chatosprojet</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-    
-        <!-- customer data  -->
-    
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body-customer">
-
-                    <!-- name  -->
-
-                    <div class="customer-title">
-                        {{ customer.name + " " + customer.surname }}
-                    </div>
-
-                    <table class="table">
-                        <tbody>
-                            
-                            <!-- rfc  -->
-                            <tr>
-                                <th class="col-md-4">RFC</th>
-                                <td>{{ customer.rfc }}</td>
-                            </tr>
-                                
-                            <!-- mail  -->
-                            <tr>
-                                <th class="col-md-4">Correo electrónico</th>
-                                <td>{{ customer.mail }}</td>
-                            </tr>
-                                
-                            <!-- region  -->
-                            <tr>
-                                <th class="col-md-4">Región</th>
-                                <td>{{ region.region }}</td>
-                            </tr>
-                            
-                            <!-- rfc  -->
-                            <tr>
-                                <th class="col-md-4">Dirección</th>
-                                <td>{{ customer.address }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Nombre completo</p>
                 </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ customer.name + " " + customer.surname }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Correo electrónico</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ customer.name + " " + customer.surname }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">RFC</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{customer.rfc}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Region</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{region.region}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Dirección</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{customer.address}}</p>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    
+      </div>
     </div>
 </div>
 

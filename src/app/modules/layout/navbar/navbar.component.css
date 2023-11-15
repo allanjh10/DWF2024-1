@@ -3,3 +3,7 @@
 nav {
   height: 70px; /* Cambiar el ancho como desees */
 }
+
+.nav-link{
+  margin-bottom: -9px ;
+}

@@ -8,6 +8,7 @@ import { LayoutModule } from './modules/layout/layout.module';
 import { CategoryComponent } from './modules/product/components/category/category.component';
 import { ConsumeApiModule } from './modules/consume-api/consume-api.module';
 import {NgxPhotoEditorModule} from "ngx-photo-editor";
+import { InvoiceModule } from './modules/invoice/invoice.module';
 
 
 @NgModule({
