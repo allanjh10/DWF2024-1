@@ -9,4 +9,12 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'chatosproject';
+
+  ngOnInit() {
+    localStorage.setItem("user_rfc", "SAAI920101A01"); // almacenar un valor en localstorage
+
+    let user_rfc = localStorage.getItem("user_rfc"); // recuperar un valor de localstorage
+    console.log(user_rfc); 
+
+  }
 }

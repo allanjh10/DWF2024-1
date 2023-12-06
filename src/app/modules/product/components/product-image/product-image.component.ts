@@ -9,7 +9,6 @@ import { ProductService } from '../../_services/product.service';
 import { ProductImage } from '../../_models/product-image';
 import { Product } from '../../_models/product';
 import { Category } from '../../_models/category';
-
 declare var $: any; // jquery
 
 @Component({
@@ -24,7 +23,6 @@ export class ProductImageComponent{
   product_image: any | ProductImage = new ProductImage(); // datos de la imagen del producto consultado
   product_images: any | ProductImage[] = []; // lista de imagenes del producto consultado
   gtin: any | string = ""; // gtin del producto consultado
-
   categories: Category[] = []; // lista de regiones
   category: any | Category = new Category() // datos de categoria consultada
 
@@ -51,7 +49,7 @@ export class ProductImageComponent{
     private categoryService: CategoryService, // servicio category de API
     private route: ActivatedRoute, // recupera parámetros de la url
     private router: Router, // redirigir a otro componente
-    private service: NgxPhotoEditorService
+    private service: NgxPhotoEditorService,
   ){}
 
   ngOnInit(){
@@ -301,5 +299,6 @@ export class ProductImageComponent{
   redirect(url: string[]){
     this.router.navigate(url);
   }
+
 }
 

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/cart/cart.component';
-
+import { ProductModule } from '../product/product.module';
 @NgModule({
   declarations: [
     CartComponent,
@@ -15,7 +15,11 @@ import { CartComponent } from './components/cart/cart.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    ProductModule,
+  ],
+  exports: [
+    CartComponent,
   ]
   
 })

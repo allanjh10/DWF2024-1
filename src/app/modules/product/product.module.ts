@@ -19,6 +19,11 @@ import { ProductImageComponent } from './components/product-image/product-image.
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
+  ],
+  exports: [
+    CategoryComponent,
+    ProductComponent,
+    ProductImageComponent,
   ]
 })
 export class ProductModule { }

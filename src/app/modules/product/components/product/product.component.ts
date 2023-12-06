@@ -191,6 +191,19 @@ export class ProductComponent {
     );
   }
 
+  getProduct(gtin: string){
+    this.productService.getProduct(gtin).subscribe(
+      res => {
+        this.form.patchValue(res); // asigna la respuesta de la API al formulario
+        this.getCategories(); // consulta las categorias
+        $("#modalForm").modal("show"); // muestra el modal de registro
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   // modals 
 
   showModalForm(){
