@@ -19,51 +19,46 @@
     <!-- Table content -->
   
     <div class="card-body">
-      <table class="table">
-        <thead>
-          <tr class="table-dark">
-            <th>No.</th>
-            <th>GTIN</th>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Estatus</th>
-            <th>Más</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ product.gtin }}</td>
-            <td>{{ product.product }}</td>
-            <td>{{ product.price | currency: 'USD' }}</td>
-            <td>
-              <div class="td-status"
-              [ngClass]="{'td-status-enable': product.status == 1, 'td-status-disable': product.status == 0}" >
-                {{ product.status == 0 ? "Inactivo" : "Activo" }}
-              </div>
-            </td>
-            <td>
-              <div class="dropdown">
-                <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item"  (click)="showProduct(product.gtin)">
-                    <i class="ph ph-note-pencil icon-text-ul"></i>Ver detalles
-                  </a>
-                  <a *ngIf="product.status == 0" class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
-                    <i class="ph ph-check-circle icon-text-ul"></i> Activar
-                  </a>
-                  <a *ngIf="product.status == 1" class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
-                    <i class="ph ph-x-circle icon-text-ul"></i> Desactivar
-                  </a>
+      <div class="row" *ngFor="let product of products;">
+        <div class="col-3" *ngFor="let product of products;">
+          <div class="card">
+            <div class="card-body align-items-center">
+              <img *ngIf="product.image && product.image.length > 0" src="assets/imagenes/{{ product.image[0].image }}" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+              <h5 class="card-title">{{product.product}}</h5>
+              <p class="card-text">{{product.gtin}}</p>
+              <p class="card-text">${{product.price}}</p>
+            </div>
+            <div class="card-footer"> 
+              <div class="row">
+                <div class="col-5"> 
+                  <div class="td-status d-flex justify-content-center align-items-center"
+                    [ngClass]="{'td-status-enable': product.status == 1, 'td-status-disable': product.status == 0}" >
+                    {{ product.status == 0 ? "Inactivo" : "Activo" }}
+                  </div>
+                </div>
+                <div class="col-5">
+                  <div class="dropdown justifiy-content-end">
+                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="ph ph-dots-three-circle-vertical" style="font-size: 30px;"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item"  (click)="showProduct(product.gtin)">
+                        <i class="ph ph-note-pencil icon-text-ul"></i>Ver detalles
+                      </a>
+                      <a *ngIf="product.status == 0" class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
+                        <i class="ph ph-check-circle icon-text-ul"></i> Activar
+                      </a>
+                      <a *ngIf="product.status == 1" class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
+                        <i class="ph ph-x-circle icon-text-ul"></i> Desactivar
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   

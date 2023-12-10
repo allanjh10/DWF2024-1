@@ -53,6 +53,8 @@ export class CartComponent {
       (data: any) => {
         this.cart = data;
         console.log(this.cart);
+        console.log(this.cart.length);
+        console.log(this.cart[0]);
       },
       err => {
         // muestra mensaje de error

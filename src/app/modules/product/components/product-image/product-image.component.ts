@@ -9,6 +9,8 @@ import { ProductService } from '../../_services/product.service';
 import { ProductImage } from '../../_models/product-image';
 import { Product } from '../../_models/product';
 import { Category } from '../../_models/category';
+import { Cart } from 'src/app/modules/invoice/_models/cart';
+import { CartService } from 'src/app/modules/invoice/_services/cart.service';
 declare var $: any; // jquery
 
 @Component({
@@ -25,6 +27,7 @@ export class ProductImageComponent{
   gtin: any | string = ""; // gtin del producto consultado
   categories: Category[] = []; // lista de regiones
   category: any | Category = new Category() // datos de categoria consultada
+  rfc:any | string = "";
 
 
   // formulario de actualización
@@ -50,11 +53,13 @@ export class ProductImageComponent{
     private route: ActivatedRoute, // recupera parámetros de la url
     private router: Router, // redirigir a otro componente
     private service: NgxPhotoEditorService,
+    private cartService: CartService // servicio cart de API
   ){}
 
   ngOnInit(){
     this.gtin = this.route.snapshot.paramMap.get('gtin');
     if(this.gtin){
+      this.rfc = localStorage.getItem('user_rfc');
       this.getProduct();
     }else{
       Swal.fire({
@@ -294,6 +299,67 @@ export class ProductImageComponent{
       console.log(data);
       this.updateProductImage(data.base64!);
     });
+  }
+
+  getCart(){
+    let cart1: Cart[] = [];
+    this.cartService.getCart(this.rfc).subscribe(
+      (data: any) => {
+        cart1=data;
+        console.log(cart1);
+        console.log(cart1.length);
+        console.log(cart1[0]);
+      },
+      err => {
+        // muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      }
+    );
+    return cart1;
+  }
+
+  addToCart() {
+    let cart1: Cart = new Cart();
+    cart1.cart_id = this.getCart().length+1;
+    cart1.rfc = this.rfc;
+    cart1.gtin = this.gtin;
+    cart1.quantity = 1;
+    cart1.status = 1;
+    console.log(cart1);
+    this.cartService.addToCart(cart1).subscribe(
+      (res: any) => {
+        console.log("agregado: "+ res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          text: 'El producto ha sido agregado al carrito',
+          background: '#E8F8F8',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      err => {
+        // muestra mensaje de error
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          showConfirmButton: false,
+          text: err.error.message,
+          background: '#F8E8F8',
+          timer: 2000
+        });
+      }
+    );
   }
 
   redirect(url: string[]){

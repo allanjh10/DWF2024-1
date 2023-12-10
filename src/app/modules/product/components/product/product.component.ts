@@ -4,9 +4,12 @@ import { Category } from '../../_models/category';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from '../../_services/product.service';
 import { CategoryService } from '../../_services/category.service';
+import { ProductImagesService } from '../../_services/product-images.service';
+import { ProductImage } from '../../_models/product-image';
 
 import Swal from'sweetalert2'; // sweetalert
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 declare var $: any; // jquery
 
@@ -18,6 +21,7 @@ declare var $: any; // jquery
 export class ProductComponent {
   products: DtoProductList[] = []; // lista de clientes
   categories: Category[] = []; // lista de regiones
+  images: ProductImage[] = []; // lista de imagenes del producto consultado
 
   // formulario de registro
   form = this.formBuilder.group({
@@ -36,12 +40,15 @@ export class ProductComponent {
     private formBuilder: FormBuilder, // formulario
     private productService: ProductService, // servicio product de API
     private router: Router, // redirigir a otro componente
+    private productImageService: ProductImagesService // servicio product image de API
   ){}
 
   // primera función que se ejecuta
   ngOnInit(){
     this.getProducts();
+    this.getImages();
   }
+
 
   // CRUD product
 
@@ -127,6 +134,26 @@ export class ProductComponent {
     );
   }
 
+  getImages() {
+    // Crear un array de observables para todas las llamadas a getImage
+    const observables = this.products.map(product => this.productImageService.getProductImages(product.product_id));
+  
+    // Hacer un forkJoin para esperar a que todas las llamadas se completen
+    forkJoin(observables).subscribe(
+      (responses: ProductImage[][]) => {
+        // Asignar las imágenes a los productos correspondientes
+        this.products.forEach((product, index) => {
+          // Agregar un nuevo atributo 'images' al producto
+          product.image = responses[index];
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  
+
   onSubmit(){
     // valida el formulario
     this.submitted = true;
@@ -199,6 +226,19 @@ export class ProductComponent {
         $("#modalForm").modal("show"); // muestra el modal de registro
       },
       err => {
+        console.log(err);
+      }
+    );
+  }
+
+  getImage(id: number){
+    this.productImageService.getProductImages(id).subscribe(
+      res => {
+        console.log(res)
+        return res; // asigna la respuesta de la API a la variable 
+      },
+      err => {
+        // muestra mensaje de error
         console.log(err);
       }
     );
