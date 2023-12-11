@@ -23,14 +23,15 @@ export class ProductImageComponent{
 
   product: any | Product = new Product(); // datos del producto consultado
   product_image: any | ProductImage = new ProductImage(); // datos de la imagen del producto consultado
-  product_images: any | ProductImage[] = []; // lista de imagenes del producto consultado
+  product_images: any | ProductImage[] = []; // lista de imagenes del producto consultado                         
   gtin: any | string = ""; // gtin del producto consultado
   categories: Category[] = []; // lista de regiones
   category: any | Category = new Category() // datos de categoria consultada
   rfc:any | string = "";
+  id: any | number = 0; // id del producto consultado                                                           
+                                                         
 
-
-  // formulario de actualización
+  // formulario de actualización                                                    
 
 
   form = this.formBuilder.group({
@@ -61,6 +62,7 @@ export class ProductImageComponent{
     if(this.gtin){
       this.rfc = localStorage.getItem('user_rfc');
       this.getProduct();
+      this.getCart();
     }else{
       Swal.fire({
         position: 'top-end',
@@ -309,6 +311,7 @@ export class ProductImageComponent{
         console.log(cart1);
         console.log(cart1.length);
         console.log(cart1[0]);
+        this.id=cart1.length+1;
       },
       err => {
         // muestra mensaje de error
@@ -328,7 +331,7 @@ export class ProductImageComponent{
 
   addToCart() {
     let cart1: Cart = new Cart();
-    cart1.cart_id = this.getCart().length+1;
+    cart1.cart_id = this.id;
     cart1.rfc = this.rfc;
     cart1.gtin = this.gtin;
     cart1.quantity = 1;

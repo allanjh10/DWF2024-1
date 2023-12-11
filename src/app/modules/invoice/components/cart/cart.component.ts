@@ -19,14 +19,13 @@ declare var $: any; // jquery
 
 export class CartComponent {
 
-  cart: any| Cart[] = []; // datos del producto consultado
+  cart: any[]= []; // datos del producto consultado
   rfc: any | string = "";
   id: any | number = 0; // id del producto consultado
   cart_id: number = 0;
   gtin: string = "";
   total: number = 0;
   quantity: number = 0;
-
 
 
   submitted = false; // indica si se envió el formulario
@@ -51,8 +50,11 @@ export class CartComponent {
   getCart(){
     this.cartService.getCart(this.rfc).subscribe(
       (data: any) => {
-        this.cart = data;
+          // Si data es un objeto, lo convertimos a un array de sus valores
+          this.cart = Object.values(data);
+      
         console.log(this.cart);
+        console.log(typeof(this.cart));
         console.log(this.cart.length);
         console.log(this.cart[0]);
       },
@@ -69,6 +71,17 @@ export class CartComponent {
         });
       }
     );
+  }
+  
+
+
+
+  calcularTotal(){
+    let total = 0;
+    for(let i=0; i<this.cart.length; i++){
+      total += this.cart[i].product.price * this.cart[i].quantity;
+    }
+    return total;
   }
 
   deleteCart(){
@@ -126,11 +139,24 @@ export class CartComponent {
 
   onSubmit(){
     this.submitted = true;;
-    // valida el formulario
+    // enviamos mensaje de checkout
+    Swal.fire({
+      title: '¿Desea realizar el pago?' + '\n' + 'Total: $' + this.calcularTotal() + ' MXN',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      background: '	#FAFAFA',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33'
+    }).then((result) => {
+      // si se confirma el checkout
+      if (result.isConfirmed) {
+        console.log("checkout"); 
+        //aqui agregan el codigo para invoice 
+      }
+    })
   }
-
-
-
 
   
   updateQuantity(id: number, event: any) {
@@ -140,7 +166,7 @@ export class CartComponent {
       const product: Cart | undefined = this.cart.find((item: Cart) => item.cart_id === id)
       this.gtin = product?.gtin || '';
       console.log(this.gtin);
-      this.quantity = isNaN(stockValue) ? 0 : stockValue;
+      this.quantity = event.target.value;
       this.cart_id=id;
       // Actualizar el carrito después de manipular la cantidad
       this.addToCart();
@@ -152,7 +178,7 @@ export class CartComponent {
     if (product && product.quantity > 0) {
       product.quantity--;
       this.cart_id = cart_id;
-      this.quantity = product.quantity;
+      this.quantity =-1;
       this.gtin = product.gtin;
       this.addToCart();
     }
@@ -163,7 +189,7 @@ export class CartComponent {
     if (product) {
       product.quantity++;
       this.cart_id = cart_id;
-      this.quantity = product.quantity;
+      this.quantity = 1;
       this.gtin = product.gtin;
       this.addToCart();
     }
@@ -200,7 +226,9 @@ export class CartComponent {
     );
   }
   
-  
+
+
+
 
   
 
